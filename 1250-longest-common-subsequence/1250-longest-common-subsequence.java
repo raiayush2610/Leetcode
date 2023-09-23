@@ -9,7 +9,7 @@ class Solution {
         }
 
         if(str1.charAt(len1-1)==str2.charAt(len2-1)){
-            return lcs(str1,str2,len1-1,len2-1, dp) +1;
+            return dp[len1][len2]=lcs(str1,str2,len1-1,len2-1, dp) +1;
         }
         else {
             ans1 =lcs(str1,str2,len1-1,len2,dp);
