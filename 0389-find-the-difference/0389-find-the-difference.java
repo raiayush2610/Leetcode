@@ -12,11 +12,7 @@ class Solution {
         }
         for(int i = 0; i < t.length(); i++){
             char c = t.charAt(i);
-            if(!mp2.containsKey(c)){
-                mp2.put(c, 1);
-            }else{
-                mp2.put(c, mp2.get(c) + 1);
-            }
+            mp2.put(c,mp2.getOrDefault(c,0)+1);
         }
         char ans = ' ';
         for(Map.Entry<Character, Integer>mp: mp2.entrySet()){
