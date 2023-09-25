@@ -15,7 +15,7 @@ class Solution {
             map2.put(c,map2.getOrDefault(c,0)+1);
         }
         char ans = ' ';
-        for(Map.Entry<Character, Integer>mp: map2.entrySet()){
+        for(Map.Entry<Character, Integer> mp: map2.entrySet()){
             char c = mp.getKey();
             int val = mp.getValue();
             if(!map1.containsKey(c)){
