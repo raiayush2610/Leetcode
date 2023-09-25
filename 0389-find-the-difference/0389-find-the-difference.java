@@ -3,25 +3,25 @@ class Solution {
         if(s.length() == 0){
             return t.charAt(0);
         }
-        HashMap<Character, Integer> mp1 = new HashMap<Character, Integer>();
-        HashMap<Character, Integer> mp2 = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> map1 = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> map2 = new HashMap<Character, Integer>();
         for(int i = 0; i < s.length(); i++){
             char c = s.charAt(i);
-            mp1.put(c,mp1.getOrDefault(c,0)+1);
+            map1.put(c,map1.getOrDefault(c,0)+1);
             
         }
         for(int i = 0; i < t.length(); i++){
             char c = t.charAt(i);
-            mp2.put(c,mp2.getOrDefault(c,0)+1);
+            map2.put(c,map2.getOrDefault(c,0)+1);
         }
         char ans = ' ';
-        for(Map.Entry<Character, Integer>mp: mp2.entrySet()){
+        for(Map.Entry<Character, Integer>mp: map2.entrySet()){
             char c = mp.getKey();
             int val = mp.getValue();
-            if(!mp1.containsKey(c)){
+            if(!map1.containsKey(c)){
                 ans = c;
                 break;
-            }else if(mp1.containsKey(c) && mp1.get(c) != val){
+            }else if(map1.containsKey(c) && map1.get(c) != val){
                 ans = c;
                 break;
             }
