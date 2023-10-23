@@ -7,7 +7,7 @@ class Solution {
       if(x%4!=0){
         return false;
       }
-      if(isPower(x>>2)){ return true;}
+      if(isPower(x/4)){ return true;}
       return false;
 
     }
