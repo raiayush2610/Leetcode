@@ -1,14 +1,15 @@
 class Solution {
-    public String interpret(String command) {
+    public String interpret(String c) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < command.length(); i++){
-            if(command.charAt(i) == '(' && i < command.length() - 1){
-                if(command.charAt(i+1) == ')'){
+        int l = c.length();
+        for(int i = 0; i < l; i++){
+            if(c.charAt(i) == '(' && i < l - 1){
+                if(c.charAt(i+1) == ')'){
                     sb.append('o');
                 }
             }
-            else if(command.charAt(i) != '(' && command.charAt(i) != ')'){
-                sb.append(command.charAt(i));
+            else if(c.charAt(i) != '(' && c.charAt(i) != ')'){
+                sb.append(c.charAt(i));
             }
         }
         return sb.toString();
