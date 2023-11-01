@@ -1,53 +1,37 @@
-public class Solution {
-    public int sol(int[] nums1, int[] nums2, int index, int swapped,int dp[][]) {
-        if (index == nums1.length) {
-            return 0;
-        }
-        int ans = Integer.MAX_VALUE;
-        int prev1 = nums1[index - 1];
-        int prev2 = nums2[index - 1];
-        if(dp[index][swapped]!= -1){
-            return dp[index][swapped];
+class Solution {
+    public int minSwap(int[] nums1, int[] nums2) {
+      
+    int n = nums1.length;
+
+    // Create two arrays to store the minimum swaps needed up to the current index
+    int[] keep = new int[n];
+    int[] swap = new int[n];
+
+    // Initialize the arrays
+    keep[0] = 0;
+    swap[0] = 1;
+
+    for (int i = 1; i < n; i++) {
+        // Initialize keep and swap values for the current index
+        keep[i] = Integer.MAX_VALUE;
+        swap[i] = Integer.MAX_VALUE;
+
+        // Check if swapping at the current index is needed for both arrays
+        if (nums1[i] > nums1[i - 1] && nums2[i] > nums2[i - 1]) {
+            // If we swap at i, we need to consider the minimum swaps at i-1 for both keep and swap
+            swap[i] = Math.min(swap[i], swap[i - 1] + 1);
+            keep[i] = Math.min(keep[i], keep[i - 1]);
         }
 
-        // Swapped
-        if (swapped==0) {
-            int temp = prev1;
-            prev1 = prev2;
-            prev2 = temp;
+        if (nums1[i] > nums2[i - 1] && nums2[i] > nums1[i - 1]) {
+            // If we swap at i, we need to consider the minimum swaps at i-1 for both keep and swap
+            swap[i] = Math.min(swap[i], keep[i - 1] + 1);
+            keep[i] = Math.min(keep[i], swap[i - 1]);
         }
-
-        // No swap
-        if (nums1[index] > prev1 && nums2[index] > prev2) {
-            ans = sol(nums1, nums2, index + 1, 1,dp);
-        }
-
-        // Swapped
-        if (nums1[index] > prev2 && nums2[index] > prev1) {
-            ans = Math.min(ans, 1 + sol(nums1, nums2, index + 1,0,dp));
-        }
-        dp[index][swapped]= ans;
-
-        return dp[index][swapped];
     }
 
-    public int minSwap(int[] nums1, int[] nums2) {
-        int n= nums1.length;
-        int[] nums1Extended = new int[nums1.length + 1];
-        System.arraycopy(nums1, 0, nums1Extended, 1, nums1.length);
-         nums1Extended[0] = -1;
-
-        int[] nums2Extended = new int[nums2.length + 1];
-        System.arraycopy(nums2, 0, nums2Extended, 1, nums2.length);
-         nums2Extended[0] = -1;
-          int dp [][]= new int [n+1][2];
-          for(int i=0;i<n+1;i++){
-              Arrays.fill(dp[i],-1);
-          }
-        
-        
-
-        int swapped = 1;
-        return sol(nums1Extended, nums2Extended, 1, swapped,dp);
+    // The result should be the minimum of the last elements of keep and swap arrays
+    return Math.min(keep[n - 1], swap[n - 1]);
+ 
     }
 }
